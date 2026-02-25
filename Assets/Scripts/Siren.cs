@@ -10,10 +10,11 @@ public class Siren : MonoBehaviour
     
     private float _currentVolume;
     private float _targetVolume;
+    private float _radiusSqr;
     
     private AudioSource _audioSource;
     private Transform _intruder;
-    private float _radiusSqr;
+    
     private bool _isAdjustingAlarm = false;
     
     private void Awake()
