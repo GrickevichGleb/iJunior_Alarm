@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(Collider2D))]
 public class Alarm : MonoBehaviour
 {
     [SerializeField] private float _volumeChangeRate = 0.2f;
@@ -38,23 +38,23 @@ public class Alarm : MonoBehaviour
         _currentVolume = Mathf.MoveTowards(_currentVolume, _targetVolume, _volumeChangeRate * Time.deltaTime);
         _audioSource.volume = _currentVolume;
     }
-
-    private void OnTriggerEnter(Collider other)
+    
+    
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.TryGetComponent(out _thief))
         {
             _audioSource.Play();
-            Debug.Log("Thief entered radius");
+            _audioSource.loop = true;
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit2D(Collider2D other)
     {
         if (other.TryGetComponent(out _thief))
         {
             _audioSource.Stop();
             _thief = null;
-            Debug.Log("Thief exited radius");
         }
     }
 }
